@@ -12,6 +12,7 @@ import { ClientProfileTab } from './tabs/ClientProfileTab';
 
 import { getStyles } from '../../styles/ClientDashboard.styles';
 import { useTheme } from '../../context/ThemeContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 type ClientTab = 'overview' | 'gallery' | 'services' | 'profile';
 
@@ -89,7 +90,10 @@ export function ClientDashboardScreen({ onLogout, onSwitchRole }: ClientDashboar
           return (
             <Pressable
               key={tab.id}
-              onPress={() => setActiveTab(tab.id)}
+              onPress={() => {
+                triggerHaptic.selection();
+                setActiveTab(tab.id);
+              }}
               style={styles.tabButton}
             >
               <View style={[styles.tabIconBox, isActive && styles.tabIconBoxActive]}>
