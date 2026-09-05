@@ -21,6 +21,7 @@ import { PrimaryButton } from '../../components/PrimaryButton';
 import { LoginFormValues, LoginFormErrors, UserRole } from '../../types/auth';
 import { getStyles } from '../../styles/LoginScreen.styles';
 import { useTheme } from '../../context/ThemeContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface LoginScreenProps {
   onNavigateToForgotPassword?: () => void;
@@ -42,7 +43,13 @@ export function LoginScreen({ onNavigateToForgotPassword, onLoginSuccess }: Logi
 
   const shakeOffset = useSharedValue(0);
 
+  const handleSelectRole = (role: UserRole) => {
+    triggerHaptic.selection();
+    setSelectedRole(role);
+  };
+
   const triggerShakeAnimation = () => {
+    triggerHaptic.error();
     shakeOffset.value = withSequence(
       withTiming(-10, { duration: 50 }),
       withTiming(10, { duration: 50 }),
@@ -98,7 +105,7 @@ export function LoginScreen({ onNavigateToForgotPassword, onLoginSuccess }: Logi
               styles.roleTab,
               selectedRole === 'engineer' && styles.roleTabActiveEngineer,
             ]}
-            onPress={() => setSelectedRole('engineer')}
+            onPress={() => handleSelectRole('engineer')}
           >
             <Ionicons
               name="construct-outline"
@@ -120,7 +127,7 @@ export function LoginScreen({ onNavigateToForgotPassword, onLoginSuccess }: Logi
               styles.roleTab,
               selectedRole === 'client' && styles.roleTabActiveClient,
             ]}
-            onPress={() => setSelectedRole('client')}
+            onPress={() => handleSelectRole('client')}
           >
             <Ionicons
               name="person-outline"

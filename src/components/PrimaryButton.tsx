@@ -7,6 +7,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { PrimaryButtonProps } from '../types/auth';
 import { theme } from '../theme/theme';
+import { triggerHaptic } from '../utils/haptics';
 
 export function PrimaryButton({
   title,
@@ -22,6 +23,7 @@ export function PrimaryButton({
 
   const handlePressIn = () => {
     if (!disabled && !isLoading) {
+      triggerHaptic.medium();
       scale.value = withSpring(0.96, theme.spring);
     }
   };

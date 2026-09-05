@@ -10,6 +10,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import { useTheme } from '../../context/ThemeContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface TermsPrivacyModalProps {
   visible: boolean;
@@ -24,6 +25,16 @@ export function TermsPrivacyModal({
 }: TermsPrivacyModalProps) {
   const { colors } = useTheme();
   const [activeTab, setActiveTab] = useState<'privacy' | 'terms'>(initialTab);
+
+  const handleSwitchTab = (tab: 'privacy' | 'terms') => {
+    triggerHaptic.selection();
+    setActiveTab(tab);
+  };
+
+  const handleClose = () => {
+    triggerHaptic.light();
+    onClose();
+  };
 
   if (!visible) return null;
 
@@ -57,7 +68,7 @@ export function TermsPrivacyModal({
             </View>
 
             <Pressable
-              onPress={onClose}
+              onPress={handleClose}
               style={({ pressed }) => [
                 styles.closeButton,
                 { backgroundColor: colors.bgInput, opacity: pressed ? 0.7 : 1 },
@@ -70,7 +81,7 @@ export function TermsPrivacyModal({
           {/* Segmented Tab Bar */}
           <View style={[styles.tabContainer, { backgroundColor: colors.bgInput }]}>
             <Pressable
-              onPress={() => setActiveTab('privacy')}
+              onPress={() => handleSwitchTab('privacy')}
               style={[
                 styles.tabButton,
                 activeTab === 'privacy' && [
@@ -96,7 +107,7 @@ export function TermsPrivacyModal({
             </Pressable>
 
             <Pressable
-              onPress={() => setActiveTab('terms')}
+              onPress={() => handleSwitchTab('terms')}
               style={[
                 styles.tabButton,
                 activeTab === 'terms' && [

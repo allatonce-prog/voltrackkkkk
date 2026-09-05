@@ -6,6 +6,7 @@ import { useTheme } from '../context/ThemeContext';
 import { HelpSupportModal } from './modals/HelpSupportModal';
 import { FeedbackModal } from './modals/FeedbackModal';
 import { TermsPrivacyModal } from './modals/TermsPrivacyModal';
+import { triggerHaptic } from '../utils/haptics';
 
 interface UserAvatarDropdownProps {
   userName?: string;
@@ -38,22 +39,31 @@ export function UserAvatarDropdown({
       .toUpperCase();
   };
 
+  const toggleDropdown = () => {
+    triggerHaptic.selection();
+    setIsOpen((prev) => !prev);
+  };
+
   const handleAction = (action: () => void) => {
+    triggerHaptic.light();
     setIsOpen(false);
     action();
   };
 
   const handleHelpCenter = () => {
+    triggerHaptic.light();
     setIsOpen(false);
     setIsHelpOpen(true);
   };
 
   const handleFeedback = () => {
+    triggerHaptic.light();
     setIsOpen(false);
     setIsFeedbackOpen(true);
   };
 
   const handlePrivacyTerms = () => {
+    triggerHaptic.light();
     setIsOpen(false);
     setIsTermsOpen(true);
   };
@@ -65,7 +75,7 @@ export function UserAvatarDropdown({
           styles.avatarButton,
           { backgroundColor: colors.bgCard, borderColor: colors.borderDefault },
         ]}
-        onPress={() => setIsOpen((prev) => !prev)}
+        onPress={toggleDropdown}
         hitSlop={6}
       >
         <View style={[styles.avatarBadge, { backgroundColor: colors.voltOrange }]}>

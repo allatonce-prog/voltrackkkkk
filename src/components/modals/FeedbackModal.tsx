@@ -12,6 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import { useTheme } from '../../context/ThemeContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface FeedbackModalProps {
   visible: boolean;
@@ -25,11 +26,23 @@ export function FeedbackModal({ visible, onClose }: FeedbackModalProps) {
   const [comments, setComments] = useState('');
   const [submitted, setSubmitted] = useState(false);
 
+  const handleSelectType = (selectedType: 'bug' | 'feature' | 'general') => {
+    triggerHaptic.selection();
+    setType(selectedType);
+  };
+
+  const handleSelectRating = (selectedRating: number) => {
+    triggerHaptic.selection();
+    setRating(selectedRating);
+  };
+
   const handleSubmit = () => {
+    triggerHaptic.success();
     setSubmitted(true);
   };
 
   const handleReset = () => {
+    triggerHaptic.light();
     setSubmitted(false);
     setComments('');
   };
@@ -87,7 +100,7 @@ export function FeedbackModal({ visible, onClose }: FeedbackModalProps) {
                   <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>FEEDBACK TYPE</Text>
                   <View style={{ flexDirection: 'row', gap: 8 }}>
                     <Pressable
-                      onPress={() => setType('bug')}
+                      onPress={() => handleSelectType('bug')}
                       style={[
                         styles.typePill,
                         { backgroundColor: colors.bgInput, borderColor: colors.borderDefault },
@@ -99,7 +112,7 @@ export function FeedbackModal({ visible, onClose }: FeedbackModalProps) {
                     </Pressable>
 
                     <Pressable
-                      onPress={() => setType('feature')}
+                      onPress={() => handleSelectType('feature')}
                       style={[
                         styles.typePill,
                         { backgroundColor: colors.bgInput, borderColor: colors.borderDefault },
@@ -111,7 +124,7 @@ export function FeedbackModal({ visible, onClose }: FeedbackModalProps) {
                     </Pressable>
 
                     <Pressable
-                      onPress={() => setType('general')}
+                      onPress={() => handleSelectType('general')}
                       style={[
                         styles.typePill,
                         { backgroundColor: colors.bgInput, borderColor: colors.borderDefault },
@@ -129,7 +142,7 @@ export function FeedbackModal({ visible, onClose }: FeedbackModalProps) {
                   <Text style={[styles.sectionTitle, { color: colors.textMuted }]}>EXPERIENCE RATING</Text>
                   <View style={{ flexDirection: 'row', gap: 8 }}>
                     {[1, 2, 3, 4, 5].map((star) => (
-                      <Pressable key={star} onPress={() => setRating(star)} hitSlop={6}>
+                      <Pressable key={star} onPress={() => handleSelectRating(star)} hitSlop={6}>
                         <Ionicons
                           name={star <= rating ? 'star' : 'star-outline'}
                           size={24}

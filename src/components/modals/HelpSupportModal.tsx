@@ -13,6 +13,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import Animated, { FadeInUp, FadeOutDown } from 'react-native-reanimated';
 import { useTheme } from '../../context/ThemeContext';
+import { triggerHaptic } from '../../utils/haptics';
 
 interface HelpSupportModalProps {
   visible: boolean;
@@ -23,6 +24,11 @@ export function HelpSupportModal({ visible, onClose }: HelpSupportModalProps) {
   const { colors } = useTheme();
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedFaq, setExpandedFaq] = useState<string | null>('faq-1');
+
+  const handleToggleFaq = (id: string) => {
+    triggerHaptic.selection();
+    setExpandedFaq(expandedFaq === id ? null : id);
+  };
 
   const faqs = [
     {
@@ -58,6 +64,7 @@ export function HelpSupportModal({ visible, onClose }: HelpSupportModalProps) {
   );
 
   const handleCallHotline = () => {
+    triggerHaptic.medium();
     if (Platform.OS !== 'web') {
       Alert.alert('Calling Hotline', 'Connecting to Tagum City Field Inspection Desk: +63 917 882 1940');
     }
@@ -123,7 +130,7 @@ export function HelpSupportModal({ visible, onClose }: HelpSupportModalProps) {
                 return (
                   <Pressable
                     key={faq.id}
-                    onPress={() => setExpandedFaq(isExpanded ? null : faq.id)}
+                    onPress={() => handleToggleFaq(faq.id)}
                     style={[
                       styles.faqCard,
                       { backgroundColor: colors.bgInput, borderColor: colors.borderDefault },

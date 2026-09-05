@@ -3,6 +3,7 @@ import { View, Text, Pressable, StyleSheet } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { EngineerTab } from '../types/project';
 import { useTheme } from '../context/ThemeContext';
+import { triggerHaptic } from '../utils/haptics';
 
 interface EngineerBottomNavProps {
   activeTab: EngineerTab;
@@ -34,7 +35,10 @@ export function EngineerBottomNav({ activeTab, onTabChange }: EngineerBottomNavP
             <Pressable
               key={tab.id}
               style={styles.tabItem}
-              onPress={() => onTabChange(tab.id)}
+              onPress={() => {
+                triggerHaptic.selection();
+                onTabChange(tab.id);
+              }}
               hitSlop={8}
             >
               <Ionicons
