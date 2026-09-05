@@ -1,0 +1,239 @@
+import { StyleSheet, Platform } from 'react-native';
+import { theme, ThemeColors } from '../theme/theme';
+
+export const getStyles = (colors: ThemeColors) =>
+  StyleSheet.create({
+    safeArea: {
+      flex: 1,
+      backgroundColor: colors.bgMidnight,
+    },
+    ambientGlowTopLeft: {
+      position: 'absolute',
+      top: -80,
+      left: -80,
+      width: 260,
+      height: 260,
+      borderRadius: 130,
+      backgroundColor: 'rgba(37, 99, 235, 0.14)',
+    },
+    ambientGlowBottomRight: {
+      position: 'absolute',
+      bottom: -80,
+      right: -80,
+      width: 260,
+      height: 260,
+      borderRadius: 130,
+      backgroundColor: 'rgba(255, 85, 0, 0.14)',
+    },
+    scrollContainer: {
+      flexGrow: 1,
+      justifyContent: 'center',
+      paddingHorizontal: 24,
+      paddingVertical: 36,
+    },
+    brandHeader: {
+      alignItems: 'center',
+      marginBottom: 32,
+    },
+    brandTitleRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginBottom: 4,
+    },
+    brandVolt: {
+      fontSize: 34,
+      fontWeight: '900',
+      color: '#38BDF8',
+      letterSpacing: 1.5,
+    },
+    brandTrack: {
+      fontSize: 34,
+      fontWeight: '900',
+      color: colors.voltOrange,
+      letterSpacing: 1.5,
+    },
+    brandSubtitle: {
+      fontSize: 13,
+      fontWeight: '600',
+      color: colors.textSecondary,
+      textAlign: 'center',
+      letterSpacing: 0.8,
+      textTransform: 'uppercase',
+    },
+    card: {
+      backgroundColor: colors.bgCard,
+      borderRadius: 24,
+      padding: 24,
+      borderWidth: 1,
+      borderColor: colors.borderDefault,
+      ...(Platform.OS === 'web'
+        ? ({ boxShadow: '0px 16px 32px rgba(0, 0, 0, 0.15)' } as any)
+        : {
+            shadowColor: '#000',
+            shadowOffset: { width: 0, height: 16 },
+            shadowOpacity: 0.2,
+            shadowRadius: 20,
+            elevation: 10,
+          }),
+    },
+    optionsRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      marginVertical: 14,
+    },
+    checkboxContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: 8,
+    },
+    checkbox: {
+      width: 20,
+      height: 20,
+      borderRadius: 6,
+      borderWidth: 1.5,
+      borderColor: colors.borderDefault,
+      backgroundColor: colors.bgInput,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    checkboxChecked: {
+      backgroundColor: colors.voltOrange,
+      borderColor: colors.voltOrange,
+    },
+    checkboxLabel: {
+      color: colors.textSecondary,
+      fontSize: 13,
+      fontWeight: '500',
+    },
+    forgotText: {
+      color: '#38BDF8',
+      fontSize: 13,
+      fontWeight: '600',
+    },
+    generalErrorBox: {
+      backgroundColor: 'rgba(239, 68, 68, 0.12)',
+      borderRadius: 12,
+      padding: 12,
+      marginBottom: 16,
+      borderWidth: 1,
+      borderColor: 'rgba(239, 68, 68, 0.3)',
+    },
+    generalErrorText: {
+      color: colors.error,
+      fontSize: 13,
+      textAlign: 'center',
+      fontWeight: '500',
+    },
+    footer: {
+      marginTop: 36,
+      alignItems: 'center',
+    },
+    footerText: {
+      color: colors.textMuted,
+      fontSize: 13,
+      textAlign: 'center',
+      fontWeight: '500',
+    },
+    // Role Selector Styles
+    roleSelectorContainer: {
+      flexDirection: 'row',
+      backgroundColor: colors.bgInput,
+      borderRadius: 14,
+      padding: 4,
+      marginBottom: 20,
+      borderWidth: 1,
+      borderColor: colors.borderDefault,
+    },
+    roleTab: {
+      flex: 1,
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingVertical: 10,
+      borderRadius: 10,
+      gap: 6,
+    },
+    roleTabActiveEngineer: {
+      backgroundColor: 'rgba(56, 189, 248, 0.18)',
+      borderWidth: 1,
+      borderColor: '#38BDF8',
+    },
+    roleTabActiveClient: {
+      backgroundColor: 'rgba(255, 85, 0, 0.18)',
+      borderWidth: 1,
+      borderColor: colors.voltOrange,
+    },
+    roleTabText: {
+      color: colors.textSecondary,
+      fontSize: 12,
+      fontWeight: '600',
+    },
+    roleTabTextActiveEngineer: {
+      color: '#38BDF8',
+      fontWeight: '700',
+    },
+    roleTabTextActiveClient: {
+      color: colors.voltOrange,
+      fontWeight: '700',
+    },
+    // Dev Separator & Quick Buttons
+    devSeparatorContainer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      marginVertical: 20,
+    },
+    devSeparatorLine: {
+      flex: 1,
+      height: 1,
+      backgroundColor: colors.borderDefault,
+    },
+    devSeparatorText: {
+      color: colors.textMuted,
+      fontSize: 10,
+      fontWeight: '700',
+      letterSpacing: 1,
+      marginHorizontal: 12,
+      textTransform: 'uppercase',
+    },
+    devButtonsContainer: {
+      gap: 10,
+    },
+    devQuickButtonEngineer: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(56, 189, 248, 0.1)',
+      borderRadius: 12,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      borderWidth: 1,
+      borderColor: 'rgba(56, 189, 248, 0.3)',
+      gap: 8,
+    },
+    devQuickButtonClient: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: 'rgba(255, 85, 0, 0.1)',
+      borderRadius: 12,
+      paddingVertical: 12,
+      paddingHorizontal: 16,
+      borderWidth: 1,
+      borderColor: 'rgba(255, 85, 0, 0.3)',
+      gap: 8,
+    },
+    devQuickTextEngineer: {
+      color: '#38BDF8',
+      fontSize: 13,
+      fontWeight: '700',
+    },
+    devQuickTextClient: {
+      color: colors.voltOrange,
+      fontSize: 13,
+      fontWeight: '700',
+    },
+  });
+
+export const styles = getStyles(theme.colors);
