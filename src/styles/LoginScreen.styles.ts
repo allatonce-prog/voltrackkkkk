@@ -33,7 +33,26 @@ export const getStyles = (colors: ThemeColors) =>
     },
     brandHeader: {
       alignItems: 'center',
-      marginBottom: 32,
+      marginBottom: 24,
+    },
+    logoBadgeContainer: {
+      marginBottom: 16,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    welcomeTitle: {
+      fontSize: 24,
+      fontWeight: '800',
+      textAlign: 'center',
+      marginBottom: 6,
+      letterSpacing: -0.3,
+    },
+    welcomeSubtitle: {
+      fontSize: 13,
+      fontWeight: '500',
+      textAlign: 'center',
+      lineHeight: 18,
+      paddingHorizontal: 20,
     },
     brandTitleRow: {
       flexDirection: 'row',
@@ -231,6 +250,17 @@ export const getStyles = (colors: ThemeColors) =>
     },
     devQuickTextClient: {
       color: colors.voltOrange,
+      fontSize: 13,
+      fontWeight: '700',
+    },
+    footerLinkRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'center',
+      marginTop: 20,
+      marginBottom: 10,
+    },
+    signupLink: {
       fontSize: 13,
       fontWeight: '700',
     },

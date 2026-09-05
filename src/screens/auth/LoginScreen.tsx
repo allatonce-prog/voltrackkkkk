@@ -18,6 +18,7 @@ import Animated, {
 import { VoltLogo } from '../../components/VoltLogo';
 import { CustomInput } from '../../components/CustomInput';
 import { PrimaryButton } from '../../components/PrimaryButton';
+import { SocialLoginButtons } from '../../components/SocialLoginButtons';
 import { LoginFormValues, LoginFormErrors, UserRole } from '../../types/auth';
 import { getStyles } from '../../styles/LoginScreen.styles';
 import { useTheme } from '../../context/ThemeContext';
@@ -80,17 +81,21 @@ export function LoginScreen({ onNavigateToForgotPassword, onLoginSuccess }: Logi
 
   return (
     <View style={{ flex: 1, justifyContent: 'center' }}>
-      {/* Brand Header */}
+      {/* Brand Header matching Reference Layout */}
       <Animated.View
         entering={FadeInDown.duration(600).springify()}
         style={styles.brandHeader}
       >
-        <VoltLogo />
-        <View style={styles.brandTitleRow}>
-          <Text style={styles.brandVolt}>VOL</Text>
-          <Text style={styles.brandTrack}>TRACK</Text>
+        <View style={styles.logoBadgeContainer}>
+          <VoltLogo />
         </View>
-        <Text style={styles.brandSubtitle}>Electrical Project Management</Text>
+        
+        <Text style={[styles.welcomeTitle, { color: colors.textPrimary }]}>
+          Welcome to VoltTrack
+        </Text>
+        <Text style={[styles.welcomeSubtitle, { color: colors.textSecondary }]}>
+          Electrical project progress, hand-verified & real-time.
+        </Text>
       </Animated.View>
 
       {/* Login Form Card */}
@@ -189,43 +194,54 @@ export function LoginScreen({ onNavigateToForgotPassword, onLoginSuccess }: Logi
                 <Ionicons name="checkmark" size={14} color="#FFFFFF" />
               )}
             </View>
-            <Text style={styles.checkboxLabel}>Remember password</Text>
+            <Text style={styles.checkboxLabel}>Remember me</Text>
           </Pressable>
 
           <Pressable onPress={onNavigateToForgotPassword} hitSlop={8}>
-            <Text style={styles.forgotText}>Forgot password?</Text>
+            <Text style={[styles.forgotText, { color: colors.voltOrange }]}>Forgot Password?</Text>
           </Pressable>
         </View>
 
         {/* Action Button */}
         <PrimaryButton
-          title={`LOGIN AS ${selectedRole === 'engineer' ? 'ENGINEER' : 'CLIENT'}`}
+          title="Login"
           onPress={() => handleLogin(selectedRole)}
           isLoading={isLoading}
         />
 
-        {/* Development Quick Login Separator */}
-        <View style={styles.devSeparatorContainer}>
-          <View style={styles.devSeparatorLine} />
-          <Text style={styles.devSeparatorText}>DEV QUICK ACCESS</Text>
-          <View style={styles.devSeparatorLine} />
+        {/* Social Login Buttons Component */}
+        <SocialLoginButtons
+          onSelectSocial={(provider) => {
+            handleLogin(selectedRole);
+          }}
+        />
+
+        {/* Footer Account Link */}
+        <View style={styles.footerLinkRow}>
+          <Text style={[styles.footerText, { color: colors.textMuted }]}>
+            Already have an account?{' '}
+          </Text>
+          <Pressable onPress={() => handleLogin(selectedRole)}>
+            <Text style={[styles.signupLink, { color: colors.voltOrange }]}>Sign up</Text>
+          </Pressable>
         </View>
 
+        {/* Quick Dev Access Buttons */}
         <View style={styles.devButtonsContainer}>
           <Pressable
             style={styles.devQuickButtonEngineer}
             onPress={() => handleLogin('engineer')}
           >
-            <Ionicons name="construct" size={18} color="#38BDF8" />
-            <Text style={styles.devQuickTextEngineer}>Quick Login: Field Engineer</Text>
+            <Ionicons name="construct" size={14} color="#38BDF8" />
+            <Text style={styles.devQuickTextEngineer}>Quick Login: Engineer</Text>
           </Pressable>
 
           <Pressable
             style={styles.devQuickButtonClient}
             onPress={() => handleLogin('client')}
           >
-            <Ionicons name="person" size={18} color={colors.voltOrange} />
-            <Text style={styles.devQuickTextClient}>Quick Login: Client Owner</Text>
+            <Ionicons name="person" size={14} color={colors.voltOrange} />
+            <Text style={styles.devQuickTextClient}>Quick Login: Client</Text>
           </Pressable>
         </View>
       </Animated.View>
