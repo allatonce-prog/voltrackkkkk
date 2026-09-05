@@ -33,7 +33,7 @@ export function CustomInput({
         style={[
           styles.inputWrapper,
           {
-            backgroundColor: colors.bgInput,
+            backgroundColor: colors.bgInput === '#000000' ? 'rgba(255, 255, 255, 0.06)' : colors.bgInput,
             borderColor: getBorderColor(),
           },
         ]}

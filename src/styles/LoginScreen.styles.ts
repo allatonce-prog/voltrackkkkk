@@ -81,20 +81,10 @@ export const getStyles = (colors: ThemeColors) =>
       textTransform: 'uppercase',
     },
     card: {
-      backgroundColor: colors.bgCard,
-      borderRadius: 24,
-      padding: 24,
-      borderWidth: 1,
-      borderColor: colors.borderDefault,
-      ...(Platform.OS === 'web'
-        ? ({ boxShadow: '0px 16px 32px rgba(0, 0, 0, 0.15)' } as any)
-        : {
-            shadowColor: '#000',
-            shadowOffset: { width: 0, height: 16 },
-            shadowOpacity: 0.2,
-            shadowRadius: 20,
-            elevation: 10,
-          }),
+      backgroundColor: 'transparent',
+      borderRadius: 0,
+      padding: 0,
+      borderWidth: 0,
     },
     optionsRow: {
       flexDirection: 'row',
